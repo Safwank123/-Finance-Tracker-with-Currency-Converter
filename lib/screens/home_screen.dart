@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
 
-  // Mock data for UI demonstration
+
   final double monthlyBudget = 2000.00;
   final double totalSpent = 1250.50;
   final Map<String, List<Map<String, dynamic>>> groupedExpenses = {
@@ -64,18 +64,43 @@ class HomeScreen extends StatelessWidget {
                   )
                 : ExpenseList(groupedExpenses: groupedExpenses),
           ),
-        ],
+          ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AddExpenseScreen(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddExpenseScreen(),
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
+    );
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.deepPurple, 
+    foregroundColor: Colors.white, 
+    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12), 
+    ),
+    elevation: 4, 
+    shadowColor: Colors.deepPurple
+  ),
+  child: const Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(Icons.add, size: 20),
+      SizedBox(width: 8),
+      Text(
+        'Add Expense',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ],
+  ),
+),
+SizedBox(height: 16),
+
+        ],
       ),
     );
   }

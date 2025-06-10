@@ -48,38 +48,49 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
         title: const Text('Add New Expense'),
+        centerTitle: true,
+        elevation: 4,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Title',
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 ),
               ),
               const SizedBox(height: 16),
               TextFormField(
                 controller: _amountController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Amount',
-                  prefixText: '\$ ',
-                  border: OutlineInputBorder(),
+                  prefixText: '₹ ',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
                 value: _selectedCategory,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Category',
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 items: _categories
                     .map((category) => DropdownMenuItem<String>(
@@ -102,19 +113,29 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                  TextButton(
+                  TextButton.icon(
                     onPressed: () => _selectDate(context),
-                    child: const Text('Select Date'),
+                    icon: const Icon(Icons.calendar_today_outlined, size: 18),
+                    label: const Text('Select Date'),
                   ),
                 ],
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {},
+              ElevatedButton.icon(
+                onPressed: () {
+                  // Add your submit logic here
+                },
+                icon: const Icon(Icons.check_circle_outline),
+                label: const Text('Add Expense', style: TextStyle(fontSize: 16)),
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 4,
                 ),
-                child: const Text('Add Expense'),
               ),
             ],
           ),
